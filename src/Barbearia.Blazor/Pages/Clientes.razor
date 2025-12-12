@@ -1,0 +1,49 @@
+﻿@page "/clientes"
+@using Barbearia.Blazor.Models
+@inject Barbearia.Blazor.Services.ClientesApiService ClientesService
+
+<h3>Clientes</h3>
+
+@if (clientes is null)
+{
+    <p>Carregando...</p>
+}
+else if (!clientes.Any())
+{
+    <p>Nenhum cliente cadastrado.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th>Data Cadastro</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in clientes)
+            {
+                <tr>
+                    <td>@c.Id</td>
+                    <td>@c.Nome</td>
+                    <td>@c.Telefone</td>
+                    <td>@c.Email</td>
+                    <td>@c.DataCadastro.ToString("dd/MM/yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Cliente>? clientes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        clientes = await ClientesService.GetClientesAsync();
+    }
+}
