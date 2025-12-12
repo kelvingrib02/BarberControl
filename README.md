@@ -1,160 +1,160 @@
 # 💈 BarberControl
 
-Sistema de gestão para barbearias, focado em:
+Management system for barbershops, focused on:
 
-- controle de **clientes**
-- **barbeiros**
-- **serviços**
-- **agendamentos**
-- (futuro) visibilidade de **rentabilidade** e métricas do negócio
+- control of **clients**
+- **barbers**
+- **services**
+- **appointments**
+- (future) visibility of **profitability** and business metrics
 
-Projeto desenvolvido como estudo prático de:
+Project developed as a practical study of:
 
 - .NET 10
 - ASP.NET Core Web API
 - Blazor
 - Entity Framework Core 10
 - SQL Server
-- Arquitetura em camadas (Domain / Infrastructure / API / UI)
+- Layered architecture (Domain / Infrastructure / API / UI)
 
 ---
 
-## 🔍 Visão Geral
+## 🔍 Overview
 
-Muitas barbearias ainda usam:
+Many barbershops still use:
 
-- agenda de papel
-- apps genéricos de calendário
-- anotações soltas no WhatsApp
+- paper schedules
+- generic calendar apps
+- random notes on WhatsApp
 
-Isso dificulta:
+This makes it difficult to:
 
-- ver a agenda de todos os barbeiros em um único lugar
-- evitar conflitos de horário
-- manter histórico de atendimentos
-- entender horários de pico, serviços mais vendidos, rentabilidade, etc.
+- see all barbers’ schedules in a single place
+- avoid time conflicts
+- keep a history of appointments
+- understand peak hours, best-selling services, profitability, etc.
 
-O **BarberControl** nasce pra organizar isso de forma simples, focada e expandível.
+**BarberControl** was created to organize all of this in a simple, focused, and expandable way.
 
 ---
 
-## 🎯 Objetivos do Sistema
+## 🎯 System Goals
 
-- Centralizar o **cadastro de clientes, barbeiros e serviços**
-- Permitir **agendamento de horários** de forma simples e visual
-- Evitar **conflitos de horários** para o mesmo barbeiro
-- Guardar **histórico de atendimentos** por cliente
-- Servir como base de estudo para:
-  - arquitetura em camadas
+- Centralize **client, barber, and service registration**
+- Allow **appointment scheduling** in a simple and visual way
+- Prevent **schedule conflicts** for the same barber
+- Store **appointment history** per client
+- Serve as a study base for:
+  - layered architecture
   - ASP.NET Core Web API
   - EF Core 10 (migrations, DbContext, etc.)
-  - Blazor como front-end
-  - boas práticas de versionamento (Git/GitHub)
+  - Blazor as front-end
+  - version control best practices (Git/GitHub)
 
 ---
 
-## 👤 Público-Alvo
+## 👤 Target Audience
 
-- **Donos de barbearia** que querem:
-  - organizar agenda
-  - gerenciar clientes e barbeiros
-  - ter visão básica de desempenho/rentabilidade
+- **Barbershop owners** who want to:
+  - organize their schedule
+  - manage clients and barbers
+  - have a basic view of performance/profitability
 
-- **Barbeiros** que querem:
-  - visualizar sua agenda diária de forma simples
+- **Barbers** who want to:
+  - view their daily schedule in a simple way
 
-- **Desenvolvedores** (tipo o Kelvin do presente e do futuro 😄) que querem:
-  - estudar .NET 10, Blazor, Web API e EF Core
-  - praticar arquitetura em camadas e boas práticas
+- **Developers** (like Kelvin in the present and future 😄) who want to:
+  - study .NET 10, Blazor, Web API and EF Core
+  - practice layered architecture and good practices
 
 ---
 
-## 🚀 Funcionalidades (MVP)
+## 🚀 Features (MVP)
 
-### 1. Cadastro de Clientes
+### 1. Client Management
 
-- Criar, listar, editar e desativar clientes
-- Campos principais:
-  - Nome
-  - Telefone
-  - E-mail (opcional)
-  - Data de Cadastro
+- Create, list, edit, and deactivate clients
+- Main fields:
+  - Name
+  - Phone
+  - Email (optional)
+  - Registration Date
 
-### 2. Cadastro de Barbeiros
+### 2. Barber Management
 
-- Criar, listar, editar e desativar barbeiros
-- Campos principais:
-  - Nome
-  - Especialidades (texto livre)
-  - Ativo/Inativo
+- Create, list, edit, and deactivate barbers
+- Main fields:
+  - Name
+  - Specialties (free text)
+  - Active/Inactive
 
-### 3. Cadastro de Serviços
+### 3. Service Management
 
-- Criar, listar, editar e desativar serviços
-- Campos principais:
-  - Nome
-  - Descrição
-  - Duração em minutos
-  - Preço
+- Create, list, edit, and deactivate services
+- Main fields:
+  - Name
+  - Description
+  - Duration in minutes
+  - Price
 
-### 4. Agendamento
+### 4. Scheduling
 
-- Criar agendamentos vinculando:
-  - Cliente
-  - Barbeiro
-  - Serviço
-  - Data/Hora
-- Impedir conflitos de agendamento para o **mesmo barbeiro** no **mesmo horário**
-- Listar agendamentos:
-  - por dia
-  - por barbeiro
-  - por cliente
+- Create appointments linking:
+  - Client
+  - Barber
+  - Service
+  - Date/Time
+- Prevent scheduling conflicts for the **same barber** at the **same time**
+- List appointments:
+  - by day
+  - by barber
+  - by client
 
-### 5. Infraestrutura básica
+### 5. Basic Infrastructure
 
-- Banco **SQL Server** com:
-  - `dbBarberControl` como banco principal
+- **SQL Server** database with:
+  - `dbBarberControl` as the main database
   - migrations via **EF Core 10**
-- API em **ASP.NET Core** para gerenciar:
-  - Clientes
-  - Barbeiros
-  - Serviços
-  - Agendamentos
-- Front-end em **Blazor** consumindo a API
+- API in **ASP.NET Core** to manage:
+  - Clients
+  - Barbers
+  - Services
+  - Appointments
+- Front-end in **Blazor** consuming the API
 
 ---
 
-## 🧭 Funcionalidades Futuras (Roadmap)
+## 🧭 Future Features (Roadmap)
 
-- Autenticação e autorização:
-  - login de dono
-  - login de barbeiro
-- Dashboard com métricas:
-  - horários de pico
-  - serviços mais realizados
-  - barbeiro com mais atendimentos
-  - rentabilidade por barbeiro
-- Integração com WhatsApp / API de mensagens:
-  - lembrete de agendamentos
-- Recomendações com IA:
-  - melhores horários baseados em histórico
-  - sugestão de serviços complementares
-- Sistema de caixa simples:
-  - registro de atendimentos pagos
-  - relatório diário/mensal de faturamento estimado
+- Authentication and authorization:
+  - owner login
+  - barber login
+- Dashboard with metrics:
+  - peak hours
+  - most requested services
+  - barber with the most appointments
+  - profitability per barber
+- Integration with WhatsApp / messaging API:
+  - appointment reminders
+- AI-based recommendations:
+  - best time slots based on history
+  - suggestion of complementary services
+- Simple cash register system:
+  - record of paid appointments
+  - daily/monthly estimated revenue report
 
 ---
 
-## 🏗️ Arquitetura
+## 🏗️ Architecture
 
-O projeto segue uma arquitetura em camadas:
+The project follows a layered architecture:
 
 ```text
 BarberControl/
   src/
-    Barbearia.Domain/          -> Regras de negócio, entidades de domínio
-    Barbearia.Infrastructure/  -> Acesso a dados (EF Core, DbContext, Migrations)
-    Barbearia.Api/             -> ASP.NET Core Web API
-    Barbearia.Blazor/          -> Front-end Blazor
+    Barbearia.Domain/        -> Business rules, domain entities
+    Barbearia.Infrastructure/-> Data access (EF Core, DbContext, Migrations)
+    Barbearia.Api/           -> ASP.NET Core Web API
+    Barbearia.Blazor/        -> Blazor front-end
   tests/
-    Barbearia.Tests/           -> Testes automatizados (quando implementados)
+    Barbearia.Tests/         -> Automated tests (when implemented)
