@@ -1,23 +1,29 @@
 using Microsoft.EntityFrameworkCore;
 using Barbearia.Domain.Entities;
 
-namespace Barbearia.Infrastructure.Data
+namespace Barbearia.Infrastructure.Data;
+
+public class BarbeariaDbContext : DbContext
 {
-    public class BarbeariaDbContext : DbContext
+    public BarbeariaDbContext(DbContextOptions<BarbeariaDbContext> options)
+        : base(options)
     {
-        public BarbeariaDbContext(DbContextOptions<BarbeariaDbContext> options)
-            : base(options)
-        {
-        }
+    }
 
-        public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<Barbeiro> Barbeiros { get; set; }
-        public DbSet<Servico> Servicos { get; set; }
-        public DbSet<Agendamento> Agendamentos { get; set; }
+    public DbSet<Cliente> Clientes => Set<Cliente>();
+    public DbSet<Barbeiro> Barbeiros => Set<Barbeiro>();
+    public DbSet<Servico> Servicos => Set<Servico>();
+    public DbSet<Agendamento> Agendamentos => Set<Agendamento>();
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Cliente>(entity =>
         {
-            base.OnModelCreating(modelBuilder);
-        }
+            entity.HasKey(c => c.Id);
+            entity.Property(c => c.Nome).IsRequired().HasMaxLength(200);
+        });
+
     }
 }

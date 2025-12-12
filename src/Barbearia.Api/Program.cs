@@ -3,14 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Connection string vinda do appsettings.json
-var connectionString = builder.Configuration.GetConnectionString("BarbeariaConnection");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<BarbeariaDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
-// resto da configuração...
+app.MapControllers();
 
 app.Run();
