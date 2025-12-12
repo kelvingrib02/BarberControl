@@ -1,6 +1,15 @@
-@Barbearia.Api_HostAddress = http://localhost:5211
+@Barbearia_Api_HostAddress = https://localhost:7030
 
-GET {{Barbearia.Api_HostAddress}}/weatherforecast/
+### Listar clientes
+GET {{Barbearia_Api_HostAddress}}/api/clientes
 Accept: application/json
 
-###
+### Criar cliente
+POST {{Barbearia_Api_HostAddress}}/api/clientes
+Content-Type: application/json
+
+{
+  "nome": "Kelvin",
+  "telefone": "123",
+  "email": "kelvin@teste.com"
+}
