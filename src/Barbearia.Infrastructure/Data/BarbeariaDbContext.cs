@@ -30,15 +30,15 @@ public class BarbeariaDbContext : DbContext
                   .HasMaxLength(20);
         });
 
-        modelBuilder.Entity<Agendamento>(entity =>
-        {
-            entity.Property(c => c.DataHora < DateTime.Now)
-                  .error()
+        //modelBuilder.Entity<Agendamento>(entity =>
+        //{
+        //    entity.Property(c => c.DataHora < DateTime.Now)
+        //          .error()
 
-            entity.Property(c => c.Telefone)
-                  .IsRequired()
-                  .HasMaxLength(20);
-        });
+        //    entity.Property(c => c.Telefone)
+        //          .IsRequired()
+        //          .HasMaxLength(20);
+        //});
 
     }
 }
