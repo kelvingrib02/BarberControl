@@ -6,7 +6,7 @@ builder.Services.AddServerSideBlazor();
 //conexão API
 builder.Services.AddHttpClient("Api", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:5211");
+    client.BaseAddress = new Uri("https://localhost:7261");
 });
 
 var app = builder.Build();
