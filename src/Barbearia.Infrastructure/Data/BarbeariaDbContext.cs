@@ -21,8 +21,23 @@ public class BarbeariaDbContext : DbContext
 
         modelBuilder.Entity<Cliente>(entity =>
         {
-            entity.HasKey(c => c.Id);
-            entity.Property(c => c.Nome).IsRequired().HasMaxLength(200);
+            entity.Property(c => c.Nome)
+                  .IsRequired()
+                  .HasMaxLength(150);
+
+            entity.Property(c => c.Telefone)
+                  .IsRequired()
+                  .HasMaxLength(20);
+        });
+
+        modelBuilder.Entity<Agendamento>(entity =>
+        {
+            entity.Property(c => c.DataHora < DateTime.Now)
+                  .error()
+
+            entity.Property(c => c.Telefone)
+                  .IsRequired()
+                  .HasMaxLength(20);
         });
 
     }
