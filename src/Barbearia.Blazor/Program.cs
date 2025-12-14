@@ -1,12 +1,15 @@
+using Barbearia.Blazor.Services;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-//conexão API
-builder.Services.AddHttpClient("Api", client =>
+builder.Services.AddHttpClient<ClientesApiService>(client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7261");
+    client.BaseAddress = new Uri("https://localhost:7284");
 });
 
 var app = builder.Build();
