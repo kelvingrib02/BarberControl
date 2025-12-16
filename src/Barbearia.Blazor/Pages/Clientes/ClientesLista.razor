@@ -1,0 +1,89 @@
+﻿@page "/clientes"
+@using Barbearia.Blazor.Models
+@using Barbearia.Blazor.Services
+@inject ClientesApiService _service
+@inject NavigationManager _navigation
+
+<h3>Gerenciar Clientes</h3>
+
+<div class="row mb-3">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="NavegarParaCadastro">
+            Novo Cliente
+        </button>
+    </div>
+</div>
+
+@if (listaClientes == null)
+{
+    <p><em>Carregando clientes...</em></p>
+}
+else if (!listaClientes.Any())
+{
+    <p>Não há clientes cadastrados.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Data Cadastro</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cliente in listaClientes)
+            {
+                <tr>
+                    <td>@cliente.Nome</td>
+                    <td>@cliente.Telefone</td>
+                    <td>@cliente.DataCadastro.ToShortDateString()</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning"
+                                @onclick="() => NavegarParaEdicao(cliente.Id)">
+                            Editar
+                        </button>
+
+                        <button class="btn btn-sm btn-danger"
+                                @onclick="() => DeletarCliente(cliente.Id)">
+                            Excluir
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Cliente>? listaClientes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CarregarClientes();
+    }
+
+    private async Task CarregarClientes()
+    {
+        listaClientes = await _service.GetClientesAsync();
+    }
+
+    private void NavegarParaCadastro()
+    {
+        _navigation.NavigateTo("/clientes/novo");
+    }
+
+    private void NavegarParaEdicao(int id)
+    {
+        _navigation.NavigateTo($"/clientes/editar/{id}");
+    }
+
+    private async Task DeletarCliente(int id)
+    {
+        await _service.DeleteClienteAsync(id);
+
+        await CarregarClientes();
+    }
+}

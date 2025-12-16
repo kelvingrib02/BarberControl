@@ -1,21 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 18
-VisualStudioVersion = 18.1.11304.174
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CE82D1A9-8ACA-45DD-87D9-FEE840178A4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barbearia.Domain", "src\Barbearia.Domain\Barbearia.Domain.csproj", "{D86828F4-612E-4587-8801-5DB401A73D19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Barbearia.Domain", "src\Barbearia.Domain\Barbearia.Domain.csproj", "{D86828F4-612E-4587-8801-5DB401A73D19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barbearia.Infrastructure", "src\Barbearia.Infrastructure\Barbearia.Infrastructure.csproj", "{FB5A6627-BAE1-464E-9285-1A79B5637F9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Barbearia.Infrastructure", "src\Barbearia.Infrastructure\Barbearia.Infrastructure.csproj", "{FB5A6627-BAE1-464E-9285-1A79B5637F9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barbearia.Api", "src\Barbearia.Api\Barbearia.Api.csproj", "{9B915000-F323-4A42-83D1-424E8A3BAF3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Barbearia.Api", "src\Barbearia.Api\Barbearia.Api.csproj", "{9B915000-F323-4A42-83D1-424E8A3BAF3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barbearia.Blazor", "src\Barbearia.Blazor\Barbearia.Blazor.csproj", "{29EC1427-A1D8-4ECE-9F6B-982ABBE3AB80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Barbearia.Blazor", "src\Barbearia.Blazor\Barbearia.Blazor.csproj", "{29EC1427-A1D8-4ECE-9F6B-982ABBE3AB80}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{52D9B17F-1670-42F4-9ADC-77069DDA7F1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barbearia.Tests", "tests\Barbearia.Tests\Barbearia.Tests.csproj", "{C2E7CFD9-6B83-40D4-8A5B-ECE661F89888}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Barbearia.Tests", "tests\Barbearia.Tests\Barbearia.Tests.csproj", "{C2E7CFD9-6B83-40D4-8A5B-ECE661F89888}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
