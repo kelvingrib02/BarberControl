@@ -40,7 +40,7 @@
 
     private async Task HandleValidSubmit()
     {
-        await _service.CreateClienteAsync(cliente);
+        await _service.PostClienteAsync(cliente);
 
         _navigation.NavigateTo("/clientes");
     }
