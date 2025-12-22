@@ -75,15 +75,19 @@ else
         _navigation.NavigateTo("/clientes/novo");
     }
 
-    private void NavegarParaEdicao(int id)
-    {
-        _navigation.NavigateTo($"/clientes/editar/{id}");
-    }
-
-    private async Task DeletarCliente(int id)
+    private async Task ExcluirCliente(int id)
     {
         await _service.DeleteClienteAsync(id);
 
-        await CarregarClientes();
+        var itemRemovido = clientes.FirstOrDefault(c => c.Id == id);
+        if (itemRemovido != null)
+        {
+            clientes.Remove(itemRemovido);
+        }
+    }
+
+    private void NavegarParaEdicao(int id)
+    {
+        _navigation.NavigateTo($"/clientes/editar/{id}");
     }
 }

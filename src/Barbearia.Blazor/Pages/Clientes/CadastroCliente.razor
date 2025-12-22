@@ -1,10 +1,11 @@
 ﻿@page "/clientes/novo"
+@page "/clientes/editar/{Id:int}"
 @using Barbearia.Blazor.Models
 @using Barbearia.Blazor.Services
 @inject ClientesApiService _service
 @inject NavigationManager _navigation
 
-<h3>Novo Cliente</h3>
+<h3>@titulo</h3>
 
 <div class="card">
     <div class="card-body">
@@ -36,17 +37,36 @@
 </div>
 
 @code {
+    [Parameter]
+    public int? Id { get; set; }
+
     private Cliente cliente = new Cliente();
+    private string titulo = "Novo Cliente";
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id is not null)
+        {
+            titulo = "Editar Cliente";
+            var clienteEncontrado = await _service.GetClienteByIdAsync(Id.Value);
+            if (clienteEncontrado != null)
+            {
+                cliente = clienteEncontrado;
+            }
+        }
+    }
 
     private async Task HandleValidSubmit()
     {
-        await _service.PostClienteAsync(cliente);
+        if (Id is null)
+        {
+            await _service.PostClienteAsync(cliente);
+        }
+        else
+        {
+            await _service.UpdateClienteAsync(cliente);
+        }
 
-        _navigation.NavigateTo("/clientes");
-    }
-
-    private void Cancelar()
-    {
         _navigation.NavigateTo("/clientes");
     }
 }
