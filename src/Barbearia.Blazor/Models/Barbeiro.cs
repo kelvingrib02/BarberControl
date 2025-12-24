@@ -1,4 +1,4 @@
-namespace Barbearia.Domain.Entities;
+﻿namespace Barbearia.Blazor.Models;
 
 public class Barbeiro
 {
@@ -7,5 +7,4 @@ public class Barbeiro
     public string? Especialidades { get; set; }
     public bool Ativo { get; set; } = true;
     public DateTime DataCadastro { get; set; } = DateTime.UtcNow;
-    public ICollection<Agendamento> Agendamentos { get; set; } = new List<Agendamento>();
 }

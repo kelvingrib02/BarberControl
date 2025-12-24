@@ -1,0 +1,94 @@
+﻿@page "/barbeiros"
+@using Barbearia.Blazor.Models
+@using Barbearia.Blazor.Services
+@inject BarbeiroApiService _service
+@inject NavigationManager _navigation
+
+<h3>Gerenciar Barbeiros</h3>
+
+<div class="row mb-3">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="NavegarParaCadastro">
+            Novo Barbeiro
+        </button>
+    </div>
+</div>
+
+@if (listaBarbeiros == null)
+{
+    <p><em>Carregando barbeiros...</em></p>
+}
+else if (!listaBarbeiros.Any())
+{
+    <p>Não há barbeiros cadastrados.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Data Cadastro</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var barbeiro in listaBarbeiros)
+            {
+                <tr>
+                    <td>@barbeiro.Nome</td>
+                    <td>@barbeiro.Especialidades</td>
+                    <td>@barbeiro.DataCadastro.ToShortDateString()</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning"
+                                @onclick="() => NavegarParaEdicao(barbeiro.Id)">
+                            Editar
+                        </button>
+
+                        <button class="btn btn-sm btn-danger"
+                                @onclick="() => ExcluirBarbeiro(barbeiro.Id)">
+                            Excluir
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Barbeiro>? listaBarbeiros;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CarregarBarbeiros();
+    }
+
+    private async Task CarregarBarbeiros()
+    {
+        listaBarbeiros = await _service.GetBarbeirosAsync();
+    }
+
+    private void NavegarParaCadastro()
+    {
+        _navigation.NavigateTo("/barbeiros/novo");
+    }
+
+    private async Task ExcluirBarbeiro(int id)
+    {
+        await _service.DeleteBarbeiroAsync(id);
+
+        var itemRemovido = listaBarbeiros?.FirstOrDefault(c => c.Id == id);
+
+        if (itemRemovido != null)
+        {
+            listaBarbeiros?.Remove(itemRemovido);
+        }
+    }
+
+    private void NavegarParaEdicao(int id)
+    {
+        _navigation.NavigateTo($"/barbeiros/editar/{id}");
+    }
+}

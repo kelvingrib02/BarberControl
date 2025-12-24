@@ -7,6 +7,5 @@ public class Cliente
     public string Telefone { get; set; } = null!;
     public string? Email { get; set; }
     public DateTime DataCadastro { get; set; } = DateTime.UtcNow;
-
     public ICollection<Agendamento> Agendamentos { get; set; } = new List<Agendamento>();
 }
