@@ -35,8 +35,6 @@ public class BarbeirosController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Barbeiro>> PostBarbeiro(Barbeiro barbeiro)
     {
-        barbeiro.DataCadastro = DateTime.UtcNow;
-
         _context.Barbeiros.Add(barbeiro);
         await _context.SaveChangesAsync();
 

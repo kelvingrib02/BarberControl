@@ -3,9 +3,8 @@ namespace Barbearia.Domain.Entities;
 public class Barbeiro
 {
     public int Id { get; set; }
-    public string Nome { get; set; } = null!;
-    public string? Especialidades { get; set; }
+    public string Nome { get; set; } = string.Empty;
+    public string Especialidade { get; set; } = string.Empty;
     public bool Ativo { get; set; } = true;
-    public DateTime DataCadastro { get; set; } = DateTime.UtcNow;
     public ICollection<Agendamento> Agendamentos { get; set; } = new List<Agendamento>();
 }

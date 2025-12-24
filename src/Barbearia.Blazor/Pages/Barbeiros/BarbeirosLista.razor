@@ -1,7 +1,7 @@
 ﻿@page "/barbeiros"
 @using Barbearia.Blazor.Models
 @using Barbearia.Blazor.Services
-@inject BarbeiroApiService _service
+@inject BarbeirosApiService _service
 @inject NavigationManager _navigation
 
 <h3>Gerenciar Barbeiros</h3>
@@ -38,8 +38,7 @@ else
             {
                 <tr>
                     <td>@barbeiro.Nome</td>
-                    <td>@barbeiro.Especialidades</td>
-                    <td>@barbeiro.DataCadastro.ToShortDateString()</td>
+                    <td>@barbeiro.Especialidade</td>
                     <td>
                         <button class="btn btn-sm btn-warning"
                                 @onclick="() => NavegarParaEdicao(barbeiro.Id)">
