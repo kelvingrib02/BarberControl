@@ -1,5 +1,72 @@
-﻿<h3>CadastroBarbeiros</h3>
+﻿@page "/barbeiros/novo"
+@page "/barbeiros/editar/{Id:int}"
+@using Barbearia.Blazor.Models
+@using Barbearia.Blazor.Services
+@inject BarbeirosApiService _service
+@inject NavigationManager _navigation
+
+<h3>@titulo</h3>
+
+<div class="card">
+    <div class="card-body">
+        <EditForm Model="@barbeiro" OnValidSubmit="HandleValidSubmit">
+
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="mb-3">
+                <label class="form-label">Nome:</label>
+                <InputText class="form-control" @bind-Value="barbeiro.Nome" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Especialidade:</label>
+                <InputText class="form-control" @bind-Value="barbeiro.Especialidade" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar Barbeiro</button>
+            <button type="button" class="btn btn-secondary" @onclick="Cancelar">Cancelar</button>
+
+        </EditForm>
+    </div>
+</div>
 
 @code {
+    [Parameter]
+    public int? Id { get; set; }
 
+    private Barbeiro barbeiro = new Barbeiro();
+    private string titulo = "Novo Barbeiro";
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id is not null)
+        {
+            titulo = "Editar Barbeiro";
+            var barbeiroEncontrado = await _service.GetBarbeiroByIdAsync(Id.Value);
+            if (barbeiroEncontrado != null)
+            {
+                barbeiro = barbeiroEncontrado;
+            }
+        }
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        if (Id is null)
+        {
+            await _service.PostBarbeiroAsync(barbeiro);
+        }
+        else
+        {
+            await _service.UpdateBarbeiroAsync(barbeiro);
+        }
+
+        _navigation.NavigateTo("/barbeiros");
+    }
+
+    private void Cancelar()
+    {
+        _navigation.NavigateTo("/barbeiros");
+    }
 }
