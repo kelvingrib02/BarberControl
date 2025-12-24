@@ -47,7 +47,7 @@ else
                         </button>
 
                         <button class="btn btn-sm btn-danger"
-                                @onclick="() => DeletarCliente(cliente.Id)">
+                                @onclick="() => ExcluirCliente(cliente.Id)">
                             Excluir
                         </button>
                     </td>
@@ -79,10 +79,11 @@ else
     {
         await _service.DeleteClienteAsync(id);
 
-        var itemRemovido = clientes.FirstOrDefault(c => c.Id == id);
+        var itemRemovido = listaClientes?.FirstOrDefault(c => c.Id == id);
+
         if (itemRemovido != null)
         {
-            clientes.Remove(itemRemovido);
+            listaClientes?.Remove(itemRemovido);
         }
     }
 
