@@ -1,6 +1,4 @@
-using Barbearia.Domain.Entities;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace Barbearia.Blazor.Models;
 
 public class Agendamento
 {
