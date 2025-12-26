@@ -1,5 +1,87 @@
 ﻿@page "/agendamentos"
 @using Barbearia.Blazor.Models
 @using Barbearia.Blazor.Services
-@inject BarbeirosApiService _service
+@inject AgendamentosApiService _service
 @inject NavigationManager _navigation
+
+<h3>Agenda de Atendimentos</h3>
+
+<div class="row mb-3">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="NavegarParaCadastro">
+            Novo Agendamento
+        </button>
+    </div>
+</div>
+
+@if (listaAgendamentos == null)
+{
+    <p><em>Carregando agenda...</em></p>
+}
+else if (!listaAgendamentos.Any())
+{
+    <div class="alert alert-info">Nenhum agendamento encontrado.</div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Data/Hora</th>
+                <th>Cliente</th>
+                <th>Barbeiro</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in listaAgendamentos)
+            {
+                <tr>
+                    <!-- Exibe data formatada dia/mês e hora -->
+                    <td>@item.DataHora.ToString("dd/MM/yyyy HH:mm")</td>
+
+                    <!-- Aqui assumimos que sua API traz o objeto Cliente preenchido -->
+                    <td>@(item.Cliente?.Nome ?? "Cliente não identificado")</td>
+                    <td>@(item.Barbeiro?.Nome ?? "Barbeiro não identificado")</td>
+
+                    <td>
+                        <button class="btn btn-sm btn-danger"
+                                @onclick="() => ExcluirAgendamento(item.Id)">
+                            Cancelar
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Agendamento>? listaAgendamentos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CarregarAgenda();
+    }
+
+    private async Task CarregarAgenda()
+    {
+        listaAgendamentos = await _service.GetAgendamentosAsync();
+    }
+
+    private void NavegarParaCadastro()
+    {
+        _navigation.NavigateTo("/agendamentos/novo");
+    }
+
+    private async Task ExcluirAgendamento(int id)
+    {
+        // Aqui chamamos o delete (você precisa ter criado o Delete no Service igual fez nos Clientes)
+        // Se ainda não criou, pode comentar a linha abaixo por enquanto
+        await _service.DeleteAgendamentoAsync(id);
+
+        // Remove da lista visualmente
+        var item = listaAgendamentos?.FirstOrDefault(x => x.Id == id);
+        if (item != null) listaAgendamentos?.Remove(item);
+    }
+}
