@@ -28,7 +28,7 @@ public class AgendamentosController : ControllerBase
 
         if (horarioOcupado)
         {
-            return BadRequest("Este barbeiro já possui um agendamento neste horário.");
+            return BadRequest("Este barbeiro já possui um agendamento neste horário. Favor, insira outro horário.");
         }
 
         _context.Agendamentos.Add(agendamento);
